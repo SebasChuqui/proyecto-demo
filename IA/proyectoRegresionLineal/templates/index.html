@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Predicción de Alquiler - La Paz</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eef4ff, #f7f2ff);
+            color: #24324a;
+            padding: 30px;
+        }
+
+        .contenedor {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* ENCABEZADO */
+
+        .encabezado {
+            background: linear-gradient(
+                135deg,
+                #dcecff,
+                #eee5ff
+            );
+
+            padding: 30px;
+            border-radius: 22px;
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 8px 25px rgba(80, 100, 160, 0.10);
+        }
+
+        .encabezado h1 {
+            color: #203864;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .encabezado p {
+            color: #60759b;
+            font-size: 16px;
+        }
+
+
+        /* DISTRIBUCIÓN PRINCIPAL */
+
+        .principal {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+
+        /* TARJETAS */
+
+        .tarjeta {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+
+            box-shadow:
+                0 8px 25px rgba(70, 80, 130, 0.08);
+
+            border: 1px solid #e3e9f5;
+        }
+
+
+        /* GRÁFICA */
+
+        .grafica h2 {
+            color: #263b69;
+            margin-bottom: 18px;
+            font-size: 20px;
+        }
+
+        .grafica img {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+
+        /* FORMULARIO */
+
+        .formulario {
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .formulario-titulo {
+            background: linear-gradient(
+                135deg,
+                #7567e8,
+                #9b7cf6
+            );
+
+            color: white;
+
+            padding: 18px;
+
+            margin: -25px -25px 25px -25px;
+
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .formulario label {
+            display: block;
+            font-weight: bold;
+            color: #34466b;
+            margin-bottom: 10px;
+        }
+
+        .formulario input {
+            width: 100%;
+
+            padding: 14px;
+
+            border: 2px solid #dbe2f0;
+            border-radius: 12px;
+
+            font-size: 17px;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+        .formulario input:focus {
+            border-color: #8978ef;
+            box-shadow: 0 0 0 3px #eeeaff;
+        }
+
+        .boton {
+            width: 100%;
+
+            margin-top: 18px;
+
+            padding: 14px;
+
+            border: none;
+            border-radius: 12px;
+
+            background: linear-gradient(
+                135deg,
+                #7567e8,
+                #9b7cf6
+            );
+
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .boton:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 7px 15px rgba(117, 103, 232, 0.25);
+        }
+
+
+        /* RESULTADO */
+
+        .resultado {
+            background: linear-gradient(
+                135deg,
+                #e4faf4,
+                #effcf8
+            );
+
+            border: 1px solid #c5eee1;
+
+            margin-bottom: 20px;
+        }
+
+        .resultado h2 {
+            color: #198b70;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .precio {
+            background: white;
+
+            border-radius: 14px;
+
+            padding: 20px;
+
+            border: 1px solid #c9eee4;
+
+            margin-bottom: 18px;
+        }
+
+        .precio small {
+            display: block;
+            color: #607d78;
+            margin-bottom: 7px;
+        }
+
+        .precio strong {
+            color: #168568;
+            font-size: 30px;
+        }
+
+        .resultado p {
+            color: #43556c;
+            margin-top: 8px;
+        }
+
+
+        /* MÉTRICAS */
+
+        .metricas {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .metrica {
+            background: #f7f8fc;
+            padding: 15px;
+            border-radius: 13px;
+            border: 1px solid #e5e8f1;
+        }
+
+        .metrica span {
+            display: block;
+            color: #718096;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .metrica strong {
+            color: #34466b;
+            font-size: 17px;
+        }
+
+
+        /* ECUACIÓN */
+
+        .ecuacion {
+            margin-top: 15px;
+
+            background: #f1efff;
+
+            padding: 15px;
+
+            border-radius: 13px;
+
+            text-align: center;
+        }
+
+        .ecuacion span {
+            color: #7064b5;
+            font-size: 13px;
+        }
+
+        .ecuacion strong {
+            display: block;
+
+            margin-top: 7px;
+
+            color: #5c50aa;
+
+            font-size: 18px;
+        }
+
+
+        /* LEYENDA */
+
+        .leyenda {
+            margin-top: 20px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 20px;
+
+            flex-wrap: wrap;
+        }
+
+        .leyenda-item {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #60708c;
+
+            font-size: 14px;
+        }
+
+        .circulo {
+            width: 12px;
+            height: 12px;
+
+            border-radius: 50%;
+        }
+
+        .azul {
+            background: #5B8DEF;
+        }
+
+        .lila {
+            background: #8B7CF6;
+        }
+
+        .rosado {
+            background: #FF6B8A;
+        }
+
+
+        /* RESPONSIVE */
+
+        @media (max-width: 850px) {
+
+            .principal {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .encabezado h1 {
+                font-size: 25px;
+            }
+
+            .metricas {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="encabezado">
+            <h1>
+                Predicción de Alquiler de Viviendas
+            </h1>
+            <p>
+                Regresión lineal aplicada a viviendas de la ciudad de La Paz
+            </p>
+        </div>
+        <div class="principal">
+            <div class="tarjeta grafica">
+                <h2>
+                    Regresión lineal: superficie vs precio de alquiler
+                </h2>
+                {% if prediccion is not none %}
+                    <img
+                        src="{{ url_for('static', filename='grafica.png') }}"
+                    >
+                    <div class="leyenda">
+                        <div class="leyenda-item">
+                            <div class="circulo azul"></div>
+                            Datos reales
+                        </div>
+                        <div class="leyenda-item">
+                            <div class="circulo lila"></div>
+                            Regresión lineal
+                        </div>
+                        <div class="leyenda-item">
+                            <div class="circulo rosado"></div>
+                            Tu predicción
+                        </div>
+                    </div>
+                {% else %}
+                    <div style="
+                        padding: 100px 20px;
+                        text-align: center;
+                        color: #718096;
+                    ">
+                        <div style="font-size: 50px;">
+                            📊
+                        </div>
+                        <h3 style="margin-top: 15px;">
+                            Ingresa una superficie
+                        </h3>
+                        <p style="margin-top: 8px;">
+                            La gráfica aparecerá aquí después de realizar
+                            una predicción.
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+            <div>
+                <div class="tarjeta formulario">
+                    <div class="formulario-titulo">
+                        Ingrese una superficie
+                    </div>
+                    <form method="POST">
+                        <label>
+                            Superficie de la vivienda (m²)
+                        </label>
+                        <input
+                            type="number"
+                            name="metros"
+                            placeholder="Ejemplo: 80"
+                            min="1"
+                            step="0.01"
+                            required
+                        >
+                        <button
+                            type="submit"
+                            class="boton"
+                        >
+                            Calcular predicción
+                        </button>
+                    </form>
+                </div>
+                {% if prediccion is not none %}
+                <div class="tarjeta resultado">
+                    <h2>
+                        Resultado de la predicción
+                    </h2>
+                    <div class="precio">
+                        <small>
+                            Precio estimado del alquiler
+                        </small>
+                        <strong>
+                            Bs {{ "%.2f"|format(prediccion) }}
+                        </strong>
+                    </div>
+                    <p>
+                        Vivienda de
+                        <strong>{{ metros }} m²</strong>
+                    </p>
+                    <div class="ecuacion">
+                        <span>
+                            Ecuación de regresión
+                        </span>
+                        <strong>
+                            y =
+                            {{ "%.2f"|format(pendiente) }}x +
+                            {{ "%.2f"|format(intercepto) }}
+                        </strong>
+                    </div>
+                </div>
+                <div class="tarjeta">
+                    <div class="metricas">
+                        <div class="metrica">
+                            <span>
+                                Coeficiente R²
+                            </span>
+                            <strong>
+                                {{ "%.4f"|format(r2) }}
+                            </strong>
+                        </div>
+                        <div class="metrica">
+                            <span>
+                                Error cuadrático medio
+                            </span>
+                            <strong>
+                                {{ "%.2f"|format(error) }}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
