@@ -9,3 +9,11 @@ h1 { color: #1f4e79; }
 form { display: grid; gap: 10px; max-width: 420px; }
 input, button { padding: 10px; }
 button { cursor: pointer; }
+button {
+ padding: 10px 18px;
+ background: #1f4e79;
+ color: white;
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+}
